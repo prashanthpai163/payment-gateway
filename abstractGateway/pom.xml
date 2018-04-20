@@ -84,7 +84,30 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+				</plugin>
+            <plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>copy-webapp-to-tomcat</id>
+            <phase>install</phase>
+            <goals>
+                <goal>run</goal>
+            </goals>
+            <configuration>
+                <target name="Deploying webapp to Tomcat.">
+                    <copy todir="C:\ImsHealth\Test\Jenkins\apache-tomcat-7.0.73\webapps" force="true">
+                        <fileset dir="${project.build.directory}">
+                            <include name="*.war" />
+                        </fileset>
+                    </copy>
+                </target>
+            </configuration>
+        </execution>
+    </executions>
+		</plugin>
+        </plugins>
+    </build>
+
 </project>
